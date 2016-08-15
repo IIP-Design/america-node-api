@@ -1,0 +1,501 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: America Node API Documentation
+
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: api.america.gov/v1
+schemes:
+  - http   # remove in production
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+paths:
+  /courses: 
+    x-swagger-router-controller: courses
+    get:
+      description: Get all courses. 
+      operationId: getCourses
+      parameters:
+        - name: fields # for course list, do not need all fields
+          description: Course fields to return
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+          in: query
+          required: false
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Course"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+  
+  /courses/{id}:
+    x-swagger-router-controller: courses
+    get:
+      description: Get course by id
+      operationId: getCourseById
+      parameters:
+        - name: id
+          required: true
+          type: string
+          in: path
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Course"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Course not found
+  
+  /courses/{id}/lessons:
+    x-swagger-router-controller: courses
+    get:
+      description: Get all lessons in a course
+      operationId: getCourseLessons
+      parameters:
+        - name: id
+          description: Course id
+          required: true
+          type: string
+          in: path
+        - name: lesson-id
+          description: Lesson id
+          required: false
+          type: string
+          in: query
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Lesson"
+        "400":
+          description: Invalid ID supplied # which ID
+        "404":
+          description: Lesson not found
+            
+  /lessons: 
+    x-swagger-router-controller: lessons
+    get:
+      description: Get all lessons.
+      operationId: getLessons
+      parameters:
+        - name: fields # for course list, do not need all fields
+          description: Lesson fields to return
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+          in: query
+          required: false
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Lesson"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+            
+  /lessons/{id}:
+    x-swagger-router-controller: lessons
+    get:
+      description: Get lesson by id
+      operationId: getLessonsById
+      parameters:
+        - name: id
+          required: true
+          type: string
+          in: path
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Lesson"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Lesson not found
+          
+  /lessons/{id}/intructors:
+    x-swagger-router-controller: lessons
+    get:
+      description: Get all instructors in a lesson
+      operationId: getLessonInstructors
+      parameters:
+        - name: id
+          description: Lesson id
+          required: true
+          type: string
+          in: path
+        - name: intructor-id
+          description: Instructor id
+          required: true
+          type: string
+          in: query
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Instructor"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Instructor not found
+          
+  /lessons/{id}/quiz:
+    x-swagger-router-controller: lessons
+    get:
+      description: Get all quiz questions in a lesson
+      operationId: getLessonQuizQuestions
+      parameters:
+        - name: id
+          description: Lesson id
+          required: true
+          type: string
+          in: path
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Question"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Quiz not found
+          
+  /lessons/{id}/glossary:
+    x-swagger-router-controller: lessons
+    get:
+      description: Get glossary items in lesson
+      operationId: getLessonGlossary
+      parameters:
+        - name: id
+          description: Lesson id
+          required: true
+          type: string
+          in: path
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Glossary"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Glossary not found
+          
+  /lessons/{id}/resources:
+    x-swagger-router-controller: lessons
+    get:
+      description: Get resources in lesson
+      operationId: getLessonResources
+      parameters:
+        - name: id
+          description: Lesson id
+          required: true
+          type: string
+          in: path
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Resource"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Resource not found
+      
+  /instructors: 
+    x-swagger-router-controller: instructors
+    get:
+      description: Get all instructors
+      operationId: getInstructors
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Instructor"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+            
+  /instructors/{id}:
+    x-swagger-router-controller: instructors
+    get:
+      description: Get instructor by id
+      operationId: getInstructorById
+      parameters:
+        - name: id
+          required: true
+          type: string
+          in: path
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Instructor"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Instructor not found
+          
+  /resources: 
+    x-swagger-router-controller: resources
+    get:
+      description: Get all resources
+      operationId: getResources
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Resource"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/DefaultErrorResponse"
+            
+  /resources/{id}:
+    x-swagger-router-controller: resources
+    get:
+      description: Get resource by id
+      operationId: getResourceById
+      parameters:
+        - name: id
+          required: true
+          type: string
+          in: path
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Resource"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Resource not found
+          
+            
+          
+# Model definitions
+definitions:
+  Course:
+    type: object
+    required:
+      - id
+      - title
+    allOf:
+    - $ref: '#/definitions/TitleDescription'
+    properties:
+      media:
+        $ref: "#/definitions/Media"
+      lessons:
+        type: array
+        items:
+          $ref: "#/definitions/Lesson"
+      categories:
+        type: array
+        items:
+          $ref: "#/definitions/Category"
+              
+  Lesson:  
+    type: object
+    required:
+      - id
+      - title
+    allOf:
+    - $ref: '#/definitions/TitleDescription'
+    properties:
+      media:
+        $ref: "#/definitions/Media"
+      transcript: 
+        type: string
+      resources:
+        type: array
+        items:
+           $ref: "#/definitions/Resource"
+      glossary:
+        type: array
+        items:
+          $ref: "#/definitions/Glossary"
+      tags:
+        type: array
+        items:
+          $ref: "#/definitions/Tag"
+      instructors:
+        type: array
+        items:
+          $ref: "#/definitions/Instructor"
+      quiz:
+        type: array
+        items:
+          $ref: "#/definitions/Question"
+
+  Instructor:
+    type: object
+    properties:
+      id: 
+        type: integer
+      title:
+        type: string
+      bio:
+        type: string
+      media:
+        $ref: "#/definitions/Media"
+  
+  Question:  
+    type: object
+    required:
+      - questionType
+    properties:
+      id:
+        type: integer
+      questionType: 
+        type: string
+        enum:
+        - mc      # Multiple Choice
+        - sata    # Select All That Apply
+        - tf      # True/False
+        - sa      # Short Answer
+        - fr      # Free Response
+      text:
+        type: string
+      choices:
+        type: array
+        items:
+           $ref: "#/definitions/Choice"
+      feedback:
+        type: array
+        items: 
+          $ref: "#/definitions/Feedback"
+  
+  Feedback:
+    type: object
+    properties:
+      order: 
+        type: integer
+      text: 
+        type: string
+      correct: 
+        type: boolean
+    
+  Choice:
+    type: object
+    properties:
+      text: 
+        type: string
+      correct: 
+        type: boolean
+     
+  Media:
+    type: object
+    properties:
+      id:
+        type: integer
+      url: 
+        type: string
+      format:
+        type: string
+        enum:
+        - audio
+        - video
+        - image
+  
+  Resource:
+    type: object
+    required:
+      - id
+    properties: 
+      id: 
+        type: integer
+      title:
+        type: string
+      description:
+        type: string
+      url:
+        type: string
+      type:
+        type: string
+        enum:
+        - General Resource
+        - Discussion Guide
+  
+  Category:
+    type: object
+    allOf:
+    - $ref: '#/definitions/NameValue'
+    
+  Tag:
+    type: object
+    allOf:
+    - $ref: '#/definitions/NameValue'
+    
+  Glossary:
+    type: object
+    allOf:
+    - $ref: '#/definitions/NameValue'
+        
+  TitleDescription: 
+    type: object
+    required:
+      - id
+      - title
+    properties:
+      id:
+        type: string
+      title: 
+        type: string
+      description:
+        type: string
+      excerpt:
+        type: string
+  
+  NameValue: 
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name: 
+        type: string
+      description:
+        type: string
+        
+  DefaultErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
