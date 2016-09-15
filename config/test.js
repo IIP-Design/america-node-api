@@ -4,6 +4,6 @@
 let config = {};
 
 // Use special purpose test database
-config.databaseUrl = 'postgres://localhost:5432/todos-test';
+config.databaseUrl = '';
 
 module.exports = config;

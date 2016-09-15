@@ -11,11 +11,11 @@ let config = {};
 // HTTP port for Express
 config.port = process.env.PORT || 3000;
 
-// Options for Sequelize ORM connection - overrides in production and test
+// Options for Knex.js ORM connection - overrides in production and test
 // environments
-config.databaseUrl = 'postgres://localhost:5432/todos';
+config.databaseUrl = 'DB_URL';
 config.databaseOptions = {
-  dialect: 'postgres',
+  dialect: 'mysql',
   logging: false,
   pool: {
     max: 5,
