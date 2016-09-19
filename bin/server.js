@@ -8,5 +8,5 @@ const log = require('../api/log');
 let server = http.createServer( app );
 
 server.listen(config.port, () => {
-  log(`Express server listening on port *:${config.port}`);
+  log(`Magic happens on port *:${config.port}`);
 });

@@ -4,7 +4,8 @@ const path 			= require('path');
 const express 		= require('express');
 const bodyParser 	= require('body-parser');
 const morgan 		= require('morgan');
-//const routes 		= require('./controllers/routes');
+
+const routes 		= require('./routes');
 
 let app = express();
 
@@ -20,18 +21,8 @@ app.get( '/', (req, res, next ) => {
 	next();
 });
 
-app.get('/', function ( req, res ) {
-  res.status( 200 ).send( 'ok' );
-});
-
-// Static file serving happens everywhere but in production
-if ( process.env.NODE_ENV !== 'production' ) {
-  let staticPath = path.join(__dirname, '..', '..', 'public');
-  app.use('/static', express.static( staticPath) );
-}
-
 // Mount application routes
-//routes( app );
+app.use( '/', routes );
 
 // Export Express webapp instance
 module.exports = app;
