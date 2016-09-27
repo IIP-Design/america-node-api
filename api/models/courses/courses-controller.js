@@ -1,7 +1,8 @@
-const controller = require('../../lib/controller');
+'use strict';
+
+const Controller = require('../../lib/controller');
 const coursesModel  = require('./courses-facade');
 
-let coursesController = Object.create( controller );
-coursesController.model = coursesModel;
+class CoursesController extends Controller {}
 
-module.exports = coursesController;
+module.exports = new CoursesController( coursesModel );

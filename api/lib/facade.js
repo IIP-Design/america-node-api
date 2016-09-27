@@ -1,38 +1,42 @@
-let facade =  {
-  create: function( input ) {
-    const schema = new this.Schema( input );
-    return schema.save();
-  },
+class Facade {
+  constructor( Schema ) {
+    this.Schema = Schema;
+  } 
 
-  update: function( conditions, update ) {
-    return this.Schema
-    .update( conditions, update, { new: true } )
-    .exec();
-  },
+  create( input ) {
+      const schema = new this.Schema(input);
+      return schema.save();
+  } 
 
-  find: function( query ) {
-    return this.Schema
-    .find(query)
-    .exec();
-  },
+  update( conditions, update ) {
+      return this.Schema
+      .update(conditions, update, { new: true })
+      .exec();
+  } 
 
-  findOne: function( query ) {
+  find( query ) {
+      return this.Schema
+      .find(query)
+      .exec();
+  } 
+
+  findOne( query ) {
     return this.Schema
     .findOne(query)
     .exec();
-  },
+  } 
 
-  findById: function( id ) {
+  findById( id ) {
+      return this.Schema
+      .findById(id)
+      .exec();
+  } 
+  
+  remove( id ) {
     return this.Schema
-    .findById(id)
-    .exec();
-  },
-
-  remove: function( id ) {
-    return this.Schema
-    .findByIdAndRemove( id )
+    .findByIdAndRemove(id)
     .exec();
   }
 }
 
-module.exports = facade;
+module.exports = Facade;

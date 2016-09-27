@@ -1,9 +1,8 @@
 'use strict';
 
 // Test environment settings
-let config = {};
+let config = {
 
-// Use special purpose test database
-config.databaseUrl = '';
+};
 
 module.exports = config;

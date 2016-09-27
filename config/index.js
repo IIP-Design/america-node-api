@@ -11,36 +11,30 @@ let config = {};
 // HTTP port for Express
 config.port = process.env.PORT || 3000;
 
-// Options for Knex.js ORM connection - overrides in production and test
-// environments
-config.databaseUrl = 'DB_URL';
-config.databaseOptions = {
-  dialect: 'mysql',
-  logging: false,
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  }
-};
+// Set environment
+config.environment = process.env.NODE_ENV || 'development';
 
+// Set database
+config.db = require('../db');
 
 // ----------------------------------------------------
 // Assign values based on current execution environment
 // ----------------------------------------------------
-let environmentSettings = {};
+let environment = {};
+
 switch ( process.env.NODE_ENV ) {
   case 'production': 
-    environmentSettings = require('./production'); 
+    environment = require( './production' ); 
     break;
   case 'test': 
-    environmentSettings = require('./test'); 
+    environment = require( './test' ); 
     break;
   default: 
-    environmentSettings = require('./development'); 
+    environment = require( './development' ); 
     break;
 }
-config = Object.assign( config, environmentSettings );
+
+config = Object.assign( config, environment );
 
 // Export final configuration object
 module.exports = config;
