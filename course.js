@@ -109,6 +109,7 @@
           "id": 1, // Number, Required
           "title": "Nathan Kleekamp", // String, Required
           "description": "<p>A raw text description of Nathan Kleekamp", // String, Required
+          "salutation": "Mr.", // String
           "image": { // Optional
             "id": 1,
             "src": "https://placekitten.com/800/533" // String, Required
