@@ -58,7 +58,7 @@ const course = {
           }
         ]
       },
-      "media": {
+      "media": { // Required
         "id": 1, // Number, Required
         "title": "The audio/video title", // String, Required
         "video": { // Required
@@ -104,7 +104,7 @@ const course = {
           "description": "<p>This is a description of a lesson tag</p>" // String, Raw HTML
         }
       ],
-      "instructors": [
+      "instructors": [ // Array, Required
         {
           "id": 1, // Number, Required
           "title": "Nathan Kleekamp", // String, Required
