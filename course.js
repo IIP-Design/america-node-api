@@ -1,5 +1,6 @@
 const course = {
   "id": 1, // Number, Required
+  "slug": "the-course-slug", // String, Required
   "title": "Title", // String, Required
   "description": "<p>This is a description of a course</p>", // String, Required, Raw HTML
   "excerpt": "<p>This excerpt is different than the description</p>", // String, Required, Raw HTML
@@ -27,6 +28,7 @@ const course = {
   "categories": [
     {
       "id": 1, // Number, Required
+      "slug": "the-category-slug", // String, Required
       "title": "Title", // String, Required
       "description": "<p>This is a description of a category</p>", // String, Raw HTML
     }
@@ -34,6 +36,7 @@ const course = {
   "lessons": [ // Array, Required
     {
       "id": 1, // Number, Required
+      "slug": "the-lesson-slug", // String, Required
       "title": "Title", // String, Required
       "description": "<p>This is a description of a lesson</p>", // String, Required, Raw HTML
       "excerpt": "<p>This excerpt is different than the description</p>", // String, Required, Raw HTML
@@ -93,6 +96,7 @@ const course = {
       "glossary": [ // Array, Optional
         {
           "id": 1, // Number, Required
+          "slug": "the-glossary-slug", // String, Required
           "title": "Title", // String, Required
           "description": "<p>This is a description of a glossary term</p>" // String, Raw HTML, Required
         }
@@ -100,6 +104,7 @@ const course = {
       "tags": [ // Array, Optional
         {
           "id": 1, // Number, Required
+          "slug": "the-tag-slug", // String, Required
           "title": "Title", // String, Required
           "description": "<p>This is a description of a lesson tag</p>" // String, Raw HTML
         }
@@ -107,6 +112,7 @@ const course = {
       "instructors": [ // Array, Required
         {
           "id": 1, // Number, Required
+          "slug": "the-instructor-slug", // String, Required
           "title": "Nathan Kleekamp", // String, Required
           "description": "<p>A raw text description of Nathan Kleekamp", // String, Required
           "salutation": "Mr.", // String
